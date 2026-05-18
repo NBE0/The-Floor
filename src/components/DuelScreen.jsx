@@ -266,13 +266,15 @@ export default function DuelScreen() {
       {/* ── Topic header ── */}
       <div className="w-full text-center pt-2">
         <p className="text-floor-text/40 text-xs uppercase tracking-widest mb-1">Topic</p>
-        <h2 className="font-display text-7xl md:text-9xl text-floor-gold tracking-widest uppercase">
+        <h2 className="font-display text-4xl md:text-9xl text-floor-gold tracking-widest uppercase">
           {duelState.topic}
         </h2>
       </div>
 
       {/* ── Main duel row ── */}
-      <div className="w-full flex items-stretch gap-4 flex-1">
+      <div className="w-full grid gap-3 md:gap-4 flex-1 items-stretch
+                      grid-cols-2 grid-rows-[auto_1fr]
+                      md:grid-cols-[auto_1fr_auto] md:grid-rows-1">
 
         <PlayerPanel
           player={attacker}
@@ -285,7 +287,8 @@ export default function DuelScreen() {
         />
 
         {/* ── Centre image area ── */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-4 min-w-0">
+        <div className="col-span-2 row-start-2 md:col-span-1 md:col-start-2 md:row-start-1
+                        flex flex-col items-center justify-center gap-4 min-w-0">
 
           {/* Task 6.4: Preloading overlay */}
           {isPreloading ? (
@@ -358,7 +361,7 @@ export default function DuelScreen() {
 
       {/* ── Keyboard hint bar + Cancel Duel ── */}
       <div className="flex items-center gap-8 pb-2 flex-wrap justify-center">
-        <div className="flex gap-8 text-floor-text/25 text-xs uppercase tracking-widest">
+        <div className="hidden md:flex gap-8 text-floor-text/25 text-xs uppercase tracking-widest">
           <span>
             <kbd className="font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded text-floor-text/40">
               Space
@@ -470,8 +473,8 @@ function PlayerPanel({ player, timeMs, isActive, label, skipUsed, isPreloading, 
   return (
     <div
       className={`
-        flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border-2
-        transition-all duration-300 w-44 flex-shrink-0 relative overflow-hidden
+        flex flex-col items-center justify-center gap-2 md:gap-3 p-3 md:p-5 rounded-2xl border-2
+        transition-all duration-300 w-full md:w-44 md:flex-shrink-0 relative overflow-hidden
         ${isPenalized
           ? 'border-floor-accent bg-floor-accent/10 shadow-[0_0_32px_6px] shadow-floor-accent/30'
           : isActive && !isPreloading
@@ -493,13 +496,13 @@ function PlayerPanel({ player, timeMs, isActive, label, skipUsed, isPreloading, 
       <span className="w-5 h-5 rounded-full flex-shrink-0"
             style={{ backgroundColor: player.color }} />
 
-      <p className="font-display text-3xl tracking-wide text-center leading-tight"
+      <p className="font-display text-xl md:text-3xl tracking-wide text-center leading-tight"
          style={{ color: player.color }}>
         {player.name}
       </p>
 
       <p className={`
-        font-display text-5xl tracking-wider transition-colors leading-none
+        font-display text-4xl md:text-5xl tracking-wider transition-colors leading-none
         ${isPreloading
           ? 'text-floor-text/20'
           : isActive
