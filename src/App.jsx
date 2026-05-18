@@ -5,6 +5,7 @@ import Board from './components/Board';
 import DuelScreen from './components/DuelScreen';
 import PostDuelScreen from './components/PostDuelScreen';
 import WinnerScreen from './components/WinnerScreen';
+import MobileGate from './components/MobileGate';
 import { isMuted, toggleMute } from './sound/soundManager';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
 
   return (
     <>
+      <MobileGate />
       {screen}
       <button
         onClick={handleToggleMute}

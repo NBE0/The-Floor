@@ -101,54 +101,10 @@ export default function StartScreen() {
         Family Edition
       </p>
 
-      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-6 items-start">
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
-        {/* Left column — category manager */}
-        <div className="w-full lg:w-1/2 space-y-3">
-          <div className="bg-floor-surface rounded-2xl shadow-2xl px-6 py-4 space-y-3">
-            <div className="space-y-2">
-              <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
-                Gemini API Key (optional)
-              </label>
-              <input
-                type="password"
-                placeholder="Paste a Gemini key to enable AI-generated lists"
-                value={geminiApiKey}
-                onChange={e => setGeminiApiKey(e.target.value)}
-                autoComplete="off"
-                className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
-                           text-floor-text text-sm placeholder-white/30 focus:outline-none
-                           focus:border-floor-accent transition-colors"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
-                Serper API Key (optional)
-              </label>
-              <input
-                type="password"
-                placeholder="Paste a Serper key to fetch images for new categories"
-                value={serperApiKey}
-                onChange={e => setSerperApiKey(e.target.value)}
-                autoComplete="off"
-                className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
-                           text-floor-text text-sm placeholder-white/30 focus:outline-none
-                           focus:border-floor-accent transition-colors"
-              />
-            </div>
-            <p className="text-floor-text/30 text-xs">
-              Both keys are needed to add new categories with AI-generated items and images.
-              Stored locally in your browser — never sent anywhere except directly to Google / Serper.
-            </p>
-          </div>
-          <CategoryManager
-            geminiApiKey={geminiApiKey.trim()}
-            serperApiKey={serperApiKey.trim()}
-          />
-        </div>
-
-        {/* Right column — player form */}
-        <div className="w-full lg:w-1/2 bg-floor-surface rounded-2xl shadow-2xl p-8 space-y-6">
+        {/* Player form — first on mobile, right column on desktop (spans both rows) */}
+        <div className="order-1 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 w-full bg-floor-surface rounded-2xl shadow-2xl p-8 space-y-6">
 
         <div className="space-y-3">
           <input
@@ -298,8 +254,55 @@ export default function StartScreen() {
             Generate Board
           </button>
         </div>
-        </div>{/* end right column */}
-      </div>{/* end two-column row */}
+        </div>{/* end player form */}
+
+        {/* Categories — middle on mobile, bottom-left on desktop */}
+        <div className="order-2 lg:order-none lg:col-start-1 lg:row-start-2 w-full">
+          <CategoryManager
+            geminiApiKey={geminiApiKey.trim()}
+            serperApiKey={serperApiKey.trim()}
+          />
+        </div>
+
+        {/* API keys — last on mobile, top-left on desktop */}
+        <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-1 w-full bg-floor-surface rounded-2xl shadow-2xl px-6 py-4 space-y-3">
+          <div className="space-y-2">
+            <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
+              Gemini API Key (optional)
+            </label>
+            <input
+              type="password"
+              placeholder="Paste a Gemini key to enable AI-generated lists"
+              value={geminiApiKey}
+              onChange={e => setGeminiApiKey(e.target.value)}
+              autoComplete="off"
+              className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
+                         text-floor-text text-sm placeholder-white/30 focus:outline-none
+                         focus:border-floor-accent transition-colors"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
+              Serper API Key (optional)
+            </label>
+            <input
+              type="password"
+              placeholder="Paste a Serper key to fetch images for new categories"
+              value={serperApiKey}
+              onChange={e => setSerperApiKey(e.target.value)}
+              autoComplete="off"
+              className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
+                         text-floor-text text-sm placeholder-white/30 focus:outline-none
+                         focus:border-floor-accent transition-colors"
+            />
+          </div>
+          <p className="text-floor-text/30 text-xs">
+            Both keys are needed to add new categories with AI-generated items and images.
+            Stored locally in your browser — never sent anywhere except directly to Google / Serper.
+          </p>
+        </div>
+
+      </div>{/* end grid */}
     </div>
   );
 }
