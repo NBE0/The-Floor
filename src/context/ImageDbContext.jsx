@@ -14,6 +14,20 @@ export function ImageDbProvider({ children }) {
   const [db, setDb] = useState({});
   const [loaded, setLoaded] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const [geminiApiKey, setGeminiApiKey] = useState(
+    () => (typeof window !== 'undefined' ? localStorage.getItem('geminiApiKey') ?? '' : '')
+  );
+  const [serperApiKey, setSerperApiKey] = useState(
+    () => (typeof window !== 'undefined' ? localStorage.getItem('serperApiKey') ?? '' : '')
+  );
+
+  useEffect(() => {
+    localStorage.setItem('geminiApiKey', geminiApiKey);
+  }, [geminiApiKey]);
+
+  useEffect(() => {
+    localStorage.setItem('serperApiKey', serperApiKey);
+  }, [serperApiKey]);
 
   useEffect(() => {
     fetch('/imageDb.json')
@@ -86,6 +100,10 @@ export function ImageDbProvider({ children }) {
     getItemsNeedingImages,
     isFetching,
     setIsFetching,
+    geminiApiKey,
+    serperApiKey,
+    setGeminiApiKey,
+    setSerperApiKey,
   };
 
   return (
