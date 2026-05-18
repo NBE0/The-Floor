@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useGame } from '../context/GameContext';
 import { useImageDb } from '../context/ImageDbContext';
-import CategoryManager from './CategoryManager';
+import CategoryList from './CategoryList';
+import AICategoryStudio from './AICategoryStudio';
 
 const IS_PROD = import.meta.env.PROD;
 
@@ -15,20 +16,6 @@ export default function StartScreen() {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [error, setError] = useState('');
-  const [geminiApiKey, setGeminiApiKey] = useState(
-    () => localStorage.getItem('geminiApiKey') ?? ''
-  );
-  const [serperApiKey, setSerperApiKey] = useState(
-    () => localStorage.getItem('serperApiKey') ?? ''
-  );
-
-  useEffect(() => {
-    localStorage.setItem('geminiApiKey', geminiApiKey);
-  }, [geminiApiKey]);
-
-  useEffect(() => {
-    localStorage.setItem('serperApiKey', serperApiKey);
-  }, [serperApiKey]);
 
   // Pre-select the first available category whenever the catalog changes
   useEffect(() => {
@@ -256,50 +243,14 @@ export default function StartScreen() {
         </div>
         </div>{/* end player form */}
 
-        {/* Categories — middle on mobile, bottom-left on desktop */}
+        {/* Categories list — middle on mobile, bottom-left on desktop */}
         <div className="order-2 lg:order-none lg:col-start-1 lg:row-start-2 w-full">
-          <CategoryManager
-            geminiApiKey={geminiApiKey.trim()}
-            serperApiKey={serperApiKey.trim()}
-          />
+          <CategoryList />
         </div>
 
-        {/* API keys — last on mobile, top-left on desktop */}
-        <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-1 w-full bg-floor-surface rounded-2xl shadow-2xl px-6 py-4 space-y-3">
-          <div className="space-y-2">
-            <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
-              Gemini API Key (optional)
-            </label>
-            <input
-              type="password"
-              placeholder="Paste a Gemini key to enable AI-generated lists"
-              value={geminiApiKey}
-              onChange={e => setGeminiApiKey(e.target.value)}
-              autoComplete="off"
-              className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
-                         text-floor-text text-sm placeholder-white/30 focus:outline-none
-                         focus:border-floor-accent transition-colors"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-floor-text/50 text-xs uppercase tracking-widest block">
-              Serper API Key (optional)
-            </label>
-            <input
-              type="password"
-              placeholder="Paste a Serper key to fetch images for new categories"
-              value={serperApiKey}
-              onChange={e => setSerperApiKey(e.target.value)}
-              autoComplete="off"
-              className="w-full px-3 py-2 rounded-lg bg-floor-bg border border-white/10
-                         text-floor-text text-sm placeholder-white/30 focus:outline-none
-                         focus:border-floor-accent transition-colors"
-            />
-          </div>
-          <p className="text-floor-text/30 text-xs">
-            Both keys are needed to add new categories with AI-generated items and images.
-            Stored locally in your browser — never sent anywhere except directly to Google / Serper.
-          </p>
+        {/* AI Studio (keys + add + fetch + log) — last on mobile, top-left on desktop */}
+        <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-1 w-full">
+          <AICategoryStudio />
         </div>
 
       </div>{/* end grid */}

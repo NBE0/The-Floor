@@ -13,6 +13,7 @@ const ImageDbContext = createContext(null);
 export function ImageDbProvider({ children }) {
   const [db, setDb] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     fetch('/imageDb.json')
@@ -83,6 +84,8 @@ export function ImageDbProvider({ children }) {
     setImage,
     getImagesForCategory,
     getItemsNeedingImages,
+    isFetching,
+    setIsFetching,
   };
 
   return (

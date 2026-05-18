@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         text: `Generate a list of exactly ${ITEMS_PER_CATEGORY} distinct, visually recognizable types of "${category}".
                Focus on items that are easy to identify in a picture.
                Return ONLY a JSON array of strings in Hebrew.
-               Example format: ["פריט 1", "פריט 2", ...]`
+               Example format: ["item1", "item2", ...]`
       }]
     }]
   };

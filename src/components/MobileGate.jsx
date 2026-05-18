@@ -36,9 +36,9 @@ export default function MobileGate() {
           The Floor
         </h1>
         <p className="text-floor-text text-lg leading-relaxed">
-          המשחק מיועד למחשב בלבד
+          המשחק מיועד למחשב
           <br />
-          נא להיכנס שוב ממחשב
+          וכל המרבה בגודל המסך הרי זה משובח
         </p>
         <button
           onClick={handleContinue}
