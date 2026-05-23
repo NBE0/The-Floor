@@ -6,6 +6,7 @@ import DuelScreen from './components/DuelScreen';
 import PostDuelScreen from './components/PostDuelScreen';
 import WinnerScreen from './components/WinnerScreen';
 import MobileGate from './components/MobileGate';
+import { Analytics } from '@vercel/analytics/react';
 import { isMuted, toggleMute } from './sound/soundManager';
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
       >
         {muted ? '🔇' : '🔊'}
       </button>
+      <Analytics />
     </>
   );
 }
