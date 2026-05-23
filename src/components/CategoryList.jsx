@@ -35,7 +35,7 @@ export default function CategoryList() {
       {isExpanded && (
         <div className="px-6 pb-6">
           {categoryList.length > 0 ? (
-            <ul className="space-y-2">
+            <ul className="space-y-2 max-h-80 overflow-y-auto pr-1">
               {categoryList.map(cat => {
                 const ratio = cat.itemCount > 0 ? cat.imageCount / cat.itemCount : 0;
                 const complete = cat.itemCount > 0 && cat.imageCount >= cat.itemCount;

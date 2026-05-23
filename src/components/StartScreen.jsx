@@ -23,7 +23,7 @@ export default function StartScreen() {
   const canGenerate = players.length >= MIN_PLAYERS;
 
   return (
-    <div className="min-h-screen bg-floor-bg flex flex-col items-center px-6 py-10">
+    <div className="min-h-screen bg-floor-bg flex flex-col items-center px-6 py-6">
 
       <button
         onClick={() => setSettingsOpen(true)}
@@ -38,7 +38,7 @@ export default function StartScreen() {
       <h1 className="font-display text-6xl md:text-8xl text-floor-accent tracking-widest mb-2 uppercase">
         The Floor
       </h1>
-      <p className="text-floor-text/60 text-lg mb-8 tracking-wide">
+      <p className="text-floor-text/60 text-lg mb-6 tracking-wide">
         Family Edition
       </p>
 
@@ -61,7 +61,7 @@ export default function StartScreen() {
       <button
         onClick={generateBoard}
         disabled={!canGenerate}
-        className="mt-10 w-full max-w-2xl py-5 rounded-2xl font-display text-3xl
+        className="mt-6 w-full max-w-2xl py-5 rounded-2xl font-display text-3xl
                    tracking-widest uppercase transition-all duration-200
                    bg-floor-gold text-floor-bg hover:bg-floor-gold/80
                    shadow-[0_0_32px_4px] shadow-floor-gold/30
