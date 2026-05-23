@@ -42,6 +42,18 @@ export default function StartScreen() {
         Family Edition
       </p>
 
+      <button
+        onClick={generateBoard}
+        disabled={!canGenerate}
+        className="mt-2 mb-6 w-full max-w-2xl py-5 rounded-2xl font-display text-3xl
+                   tracking-widest uppercase transition-all duration-200
+                   bg-floor-gold text-floor-bg hover:bg-floor-gold/80
+                   shadow-[0_0_32px_4px] shadow-floor-gold/30
+                   disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
+      >
+        ✨ Generate Board ✨
+      </button>
+
       <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
         {/* Right column on desktop / first on mobile — Players */}
@@ -57,18 +69,6 @@ export default function StartScreen() {
         </div>
 
       </div>
-
-      <button
-        onClick={generateBoard}
-        disabled={!canGenerate}
-        className="mt-6 w-full max-w-2xl py-5 rounded-2xl font-display text-3xl
-                   tracking-widest uppercase transition-all duration-200
-                   bg-floor-gold text-floor-bg hover:bg-floor-gold/80
-                   shadow-[0_0_32px_4px] shadow-floor-gold/30
-                   disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
-      >
-        ✨ Generate Board ✨
-      </button>
 
       <SettingsDrawer isOpen={settingsOpen} onClose={() => setSettingsOpen(false)}>
         <div className="space-y-2">
