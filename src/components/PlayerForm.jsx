@@ -16,16 +16,8 @@ export default function PlayerForm() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!category && categories.length > 0) {
-      const firstFree = categories.find(n => !players.some(p => p.category === n));
-      if (firstFree) setCategory(firstFree);
-    }
-  }, [categories]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
     if (category && players.some(p => p.category === category)) {
-      const nextFree = categories.find(c => !players.some(p => p.category === c));
-      setCategory(nextFree ?? '');
+      setCategory('');
     }
   }, [players]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -102,9 +94,9 @@ export default function PlayerForm() {
                    transition-colors appearance-none cursor-pointer
                    disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        {categories.length === 0 && (
-          <option value="">Loading categories…</option>
-        )}
+        <option value="" disabled>
+          {categories.length === 0 ? 'Loading categories…' : 'Select a category…'}
+        </option>
         {categories.map(cat => {
           const taken = players.some(p => p.category === cat);
           return (
